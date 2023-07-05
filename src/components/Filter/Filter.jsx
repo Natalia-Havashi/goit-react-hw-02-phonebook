@@ -1,16 +1,24 @@
-import { nanoid } from 'nanoid';
 
-const { Component } = require('react');
+import PropTypes from 'prop-types';
 
-class Filter extends Component {
-  render() {
+
+const Filter = ({filter, handleFilterChange}) => {
+   
     return (
       <div>
         <h4>Find contacts by me</h4>
-        <input type="text" name="input" id={nanoid} />
+        <input 
+        type="text" 
+        name="filter"
+        onChange={handleFilterChange} 
+        value={filter} />
       </div>
     );
   }
-}
+
+  Filter.propTypes = {
+    filter: PropTypes.string.isRequired,
+    handleFilterChange: PropTypes.func.isRequired,
+  }
 
 export default Filter;

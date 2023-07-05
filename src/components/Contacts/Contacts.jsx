@@ -1,4 +1,4 @@
-
+import PropTypes from 'prop-types';
 import { Component } from 'react';
 
 class Contacts extends Component {
@@ -13,11 +13,23 @@ class Contacts extends Component {
     });
   };
 
+  handleSubmit = (e) => {
+e.preventDefault()
+const data = {
+  ...this.state
+}
+this.props.createUser(data)
+this.setState({
+    name: '',
+    number: '',
+})
+  }
+
 render() {
     return (
       <div>
         <div>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <label htmlFor="">Name</label>
             <input
               type="text"
@@ -44,5 +56,10 @@ render() {
       </div>
     );
   }
+}
+
+
+Contacts.propTypes = {
+  createUser:PropTypes.func.isRequired
 }
 export default Contacts;
