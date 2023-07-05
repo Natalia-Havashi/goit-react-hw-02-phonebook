@@ -3,6 +3,7 @@ import { ContactList } from './ContactList/ContactList';
 import Contacts from './Contacts/Contacts';
 import Filter from './Filter/Filter';
 import { nanoid } from 'nanoid';
+import { Container } from './styled.styled';
 const { Component } = require('react');
 
 class App extends Component {
@@ -53,7 +54,7 @@ this.setState(prevState => ({
   render() {
     const filteredContactrs = this.state.contacts.filter(contact => contact.name.toLowerCase().includes(this.state.filter.toLowerCase()))
     return (
-      <div>
+      <Container>
         <h1>PhoneBook</h1>
         <Contacts createUser={this.createUser}/>
         <h2>Contacts</h2>
@@ -61,7 +62,7 @@ this.setState(prevState => ({
         handleFilterChange = {this.handleFilterChange} />
         <ContactList filtered={filteredContactrs}
         deleteContact={this.deleteContact}/>
-      </div>
+      </Container>
     );
   }
 }

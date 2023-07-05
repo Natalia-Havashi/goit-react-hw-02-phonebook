@@ -1,3 +1,4 @@
+import { ContainerForm } from 'components/styled.styled';
 import PropTypes from 'prop-types';
 import { Component } from 'react';
 
@@ -27,8 +28,8 @@ this.setState({
 
 render() {
     return (
-      <div>
-        <div>
+     
+        <ContainerForm>
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="">Name</label>
             <input
@@ -52,8 +53,8 @@ render() {
             />
             <button>Add contact</button>
           </form>
-        </div>
-      </div>
+        </ContainerForm>
+     
     );
   }
 }
