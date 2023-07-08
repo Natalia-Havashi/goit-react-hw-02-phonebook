@@ -1,6 +1,6 @@
 import { number } from 'prop-types';
 import { ContactList } from './ContactList/ContactList';
-import Contacts from './Contacts/Contacts';
+import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import { nanoid } from 'nanoid';
 import { Container } from './styled.styled';
@@ -17,51 +17,56 @@ class App extends Component {
     filter: '',
   };
 
-  createUser = ({name}) => {
-    const isContact = this.state.contacts.filter(contact => 
-   contact.name === name)
+  createUser = ({ name }) => {
+    const isContact = this.state.contacts.filter(
+      contact => contact.name === name
+    );
 
-     if(isContact.length > 0) {
-alert(`${name} is alredy in contacts `)
-
-   }
-   else {
-     this.setState(prevState => ({
-contacts: [ ...prevState.contacts,
-{
-  id: nanoid(),
-  name: name,
-  number: number,
-}]
-   }))
-   }
-  
+    if (isContact.length > 0) {
+      alert(`${name} is alredy in contacts `);
+    } else {
+      this.setState(prevState => ({
+        contacts: [
+          ...prevState.contacts,
+          {
+            id: nanoid(),
+            name: name,
+            number: number,
+          },
+        ],
+      }));
+    }
   };
 
-  deleteContact =(id) => {
-this.setState(prevState => ({
-  contacts:prevState.contacts.filter(contact => contact.id !== id)
-}))
-  }
+  deleteContact = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
+  };
 
-  handleFilterChange = (event) => {
+  handleFilterChange = event => {
     this.setState({
       filter: event.currentTarget.value,
-    })
-
-  }
+    });
+  };
 
   render() {
-    const filteredContactrs = this.state.contacts.filter(contact => contact.name.toLowerCase().includes(this.state.filter.toLowerCase()))
+    const filteredContactrs = this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
+    );
     return (
       <Container>
         <h1>PhoneBook</h1>
-        <Contacts createUser={this.createUser}/>
+        <ContactForm createUser={this.createUser} />
         <h2>Contacts</h2>
-        <Filter filter = {this.state.filter}
-        handleFilterChange = {this.handleFilterChange} />
-        <ContactList filtered={filteredContactrs}
-        deleteContact={this.deleteContact}/>
+        <Filter
+          filter={this.state.filter}
+          handleFilterChange={this.handleFilterChange}
+        />
+        <ContactList
+          filtered={filteredContactrs}
+          deleteContact={this.deleteContact}
+        />
       </Container>
     );
   }
